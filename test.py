@@ -31,11 +31,22 @@ class ArchiveSpace:
                                   }
                               }
         r = requests.post(url=f'{self.base_url}/repositories',
-                          headers= self.headers,
+                          headers=self.headers,
                           data=json.dumps(my_new_repository))
         return
+
+    def get_repository(self, repo_code):
+        r = requests.get(url=f'{self.base_url}/repositories/{repo_code}',
+                         headers=self.headers,)
+        return r.json()
+
+    def give_me_the_repo_name(self, repo_code):
+        r = requests.get(url=f'{self.base_url}/repositories/{repo_code}',
+                         headers=self.headers, )
+        return r.json()['name']
 
 
 if __name__ == "__main__":
     kevins_archivespace = ArchiveSpace()
-    kevins_archivespace.create_repository("Mark", "Mark's Repository")
+    # utk_archivesspace = ArchiveSpace("http://albatross.lib.utk.edu:8089", "mark", "mark")
+    # print(kevins_archivespace.get_repository(2))
